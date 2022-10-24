@@ -1,7 +1,7 @@
 export class Record {
   private recordID: number;
-  private userID: number;
-  private categoryID: number;
+  public userID: number;
+  public categoryID: number;
   private date: Date;
   private amount: string;
   constructor(
