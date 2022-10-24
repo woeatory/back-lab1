@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+ lab-1-ts:
+   restart: always
+   build:
+     context: .
+     dockerfile: Dockerfile
+   environment:
+     PORT: "8000"
+   ports:
+     - "8100:8000"
