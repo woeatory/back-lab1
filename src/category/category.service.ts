@@ -3,7 +3,11 @@ import { Category } from './category.entity';
 
 @Injectable()
 export class CategoryService {
-  private categoriesList: Category[] = [];
+  private categoriesList: Category[] = [
+    new Category(0, 'products'),
+    new Category(1, 'transport'),
+    new Category(2, 'games'),
+  ];
 
   createCategory(name: string) {
     const categoryID = this.categoriesList.length;
