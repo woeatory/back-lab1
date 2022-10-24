@@ -15,4 +15,7 @@ export class UserService {
     this.usersList.push(newUser);
     return newUser;
   }
+  get getUsersList() {
+    return this.usersList;
+  }
 }
