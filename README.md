@@ -26,4 +26,4 @@ $ npm run start
 $ npm run start:dev
 ```
 
-Application will be accesed on <http://localhost:3000/>
+Application will be accesed on <http://localhost:8100/>
