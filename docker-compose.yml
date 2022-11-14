@@ -1,7 +1,7 @@
 version: '3'
 
 services:
- lab-1-ts:
+ back-lab:
    restart: always
    build:
      context: .
