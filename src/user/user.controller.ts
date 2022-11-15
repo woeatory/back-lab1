@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common/enums';
+import { HttpException } from '@nestjs/common/exceptions';
 import { CreateUserDto } from './createUserDto';
-import { ForbiddenException } from './exceptions/test.exception';
 import { UserService } from './user.service';
 
 @Controller('user')
@@ -11,7 +12,7 @@ export class UserContoller {
     try {
       return this.userService.createUser(createUserDto.userName);
     } catch (error) {
-      throw new ForbiddenException();
+      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
     }
   }
   @Get('list')
