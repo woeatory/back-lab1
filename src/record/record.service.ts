@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Record } from './record.entity';
+
+const NOT_FOUND_ERROR = new Error('Record was not found');
 @Injectable()
 export class RecordService {
   private recordsList: Record[] = [
@@ -14,6 +16,7 @@ export class RecordService {
     const recordID = this.recordsList.length;
     const newRecord = new Record(recordID, userID, categoryID, amount);
     this.recordsList.push(newRecord);
+    return newRecord;
   }
   getRecordByUserID(id: number) {
     const result: Record[] = [];
@@ -24,7 +27,8 @@ export class RecordService {
       }
     }
     if (result.length === 0) {
-      return 'not found';
+      console.error(NOT_FOUND_ERROR);
+      throw NOT_FOUND_ERROR;
     }
     return result;
   }
@@ -37,7 +41,8 @@ export class RecordService {
       }
     }
     if (result.length === 0) {
-      return 'not found';
+      console.error(NOT_FOUND_ERROR);
+      throw NOT_FOUND_ERROR;
     }
     return result;
   }

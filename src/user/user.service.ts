@@ -10,11 +10,6 @@ export class UserService {
   ];
 
   createUser(userName: string) {
-    if (typeof userName !== 'string') {
-      const err = new Error('userName has to be string');
-      console.error(err);
-      throw err;
-    }
     const userID = this.usersList.length;
     const newUser = new User(userID, userName);
     this.usersList.push(newUser);

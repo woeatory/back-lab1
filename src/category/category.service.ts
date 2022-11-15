@@ -16,6 +16,9 @@ export class CategoryService {
     return newCategory;
   }
   get getCategoriesList() {
+    if (this.categoriesList.length === 0) {
+      return 'Category list is empry';
+    }
     return this.categoriesList;
   }
 }
