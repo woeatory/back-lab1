@@ -1,16 +1,3 @@
-# version: '3'
-
-# services:
-#  records:
-
-#    restart: always
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-#    environment:
-#      PORT: "8000"
-#    ports:
-#      - "8100:8000"
 version: '3'
 services:
   records:
