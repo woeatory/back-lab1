@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpException,
+  HttpStatus,
+  Post,
+} from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './createCategoryDto';
 
@@ -7,7 +14,14 @@ export class CategoryController {
   constructor(private categoryService: CategoryService) {}
   @Post('create')
   createCategory(@Body() createCategoryDto: CreateCategoryDto) {
-    return this.categoryService.createCategory(createCategoryDto.name);
+    try {
+      return this.categoryService.createCategory(createCategoryDto.name);
+    } catch (error) {
+      throw new HttpException(
+        'This category already exists',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
   @Get('list')
   getCategoriesList() {

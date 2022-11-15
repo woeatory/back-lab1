@@ -11,6 +11,11 @@ export class CategoryService {
 
   createCategory(name: string) {
     const categoryID = this.categoriesList.length;
+    for (const cat of this.categoriesList) {
+      if (cat.name.toLowerCase() === name.toLowerCase() || cat.name === name) {
+        throw new Error('This category already exists');
+      }
+    }
     const newCategory = new Category(categoryID, name);
     this.categoriesList.push(newCategory);
     return newCategory;
