@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Record } from './record.entity';
 
-const NOT_FOUND_ERROR = new Error('Record was not found');
+const NOT_FOUND_ERROR = new Error('Record not found');
 @Injectable()
 export class RecordService {
   private recordsList: Record[] = [
