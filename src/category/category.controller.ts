@@ -7,15 +7,18 @@ import {
   Post,
 } from '@nestjs/common';
 import { CategoryService } from './category.service';
-import { CreateCategoryDto } from './createCategoryDto';
+import { CreateCategoryDto } from './Dto/createCategoryDto';
 
 @Controller('category')
 export class CategoryController {
   constructor(private categoryService: CategoryService) {}
   @Post('create')
-  createCategory(@Body() createCategoryDto: CreateCategoryDto) {
+  async createCategory(@Body() createCategoryDto: CreateCategoryDto) {
     try {
-      return this.categoryService.createCategory(createCategoryDto.name);
+      const res = await this.categoryService.createCategory(
+        createCategoryDto.name,
+      );
+      return res;
     } catch (error) {
       throw new HttpException(
         'This category already exists',
@@ -24,7 +27,8 @@ export class CategoryController {
     }
   }
   @Get('list')
-  getCategoriesList() {
-    return this.categoryService.getCategoriesList;
+  async getCategoriesList() {
+    const res = await this.categoryService.getCategoriesList();
+    return res;
   }
 }

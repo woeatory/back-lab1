@@ -18,9 +18,11 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   await app.listen(env.PORT || 8100, () => {
-    console.log(`
+    console.log(
+      `
     🚀 Server ready at: http://localhost:8100
-    ⭐️ See sample queries: http://localhost:8100/api#/`);
+    ⭐️ See sample queries: http://localhost:8100/api#/`.trimEnd(),
+    );
   });
 }
 bootstrap();
