@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsDateString, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreaeteRecordDto {
   @IsNumber()
@@ -7,4 +7,7 @@ export class CreaeteRecordDto {
   categoryID: number;
   @IsString()
   amount: string;
+  @IsOptional()
+  @IsDateString()
+  date?: Date;
 }

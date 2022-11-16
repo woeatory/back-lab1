@@ -8,37 +8,49 @@ import {
   ParseIntPipe,
   Post,
 } from '@nestjs/common';
-import { CreaeteRecordDto } from './createRecordDto';
+import { CreaeteRecordDto } from './Dto/createRecordDto';
 import { RecordService } from './record.service';
 
 @Controller('record')
 export class RecordController {
   constructor(private recordService: RecordService) {}
   @Post('create')
-  createRecord(@Body() createRecordDto: CreaeteRecordDto) {
+  async createRecord(@Body() createRecordDto: CreaeteRecordDto) {
     const userID = createRecordDto.userID;
     const categoryID = createRecordDto.categoryID;
+    const date = createRecordDto.date;
     const amount = createRecordDto.amount;
-    return this.recordService.createRecord(userID, categoryID, amount);
+    const res = await this.recordService.createRecord(
+      userID,
+      categoryID,
+      date,
+      amount,
+    );
+    return res;
   }
 
   @Get('search/:id')
-  searchByID(@Param('id', ParseIntPipe) id: number) {
+  async searchByID(@Param('id', ParseIntPipe) id: number) {
     try {
-      return this.recordService.getRecordByUserID(id);
+      const res = await this.recordService.getRecordByUserID(id);
+      return res;
     } catch (error) {
-      throw new HttpException('Record was not found', HttpStatus.BAD_REQUEST);
+      throw new HttpException('Record not found', HttpStatus.BAD_REQUEST);
     }
   }
   @Get('seachByIDandCategory/:id/:category')
-  seatchByUsedIDandCategory(
+  async seatchByUsedIDandCategory(
     @Param('id', ParseIntPipe) id: number,
     @Param('category', ParseIntPipe) category: number,
   ) {
     try {
-      return this.recordService.getRecordByUserIDandCategory(id, category);
+      const res = await this.recordService.getRecordByUserIDandCategory(
+        id,
+        category,
+      );
+      return res;
     } catch (error) {
-      throw new HttpException('Record was not found', HttpStatus.BAD_REQUEST);
+      throw new HttpException('Record not found', HttpStatus.BAD_REQUEST);
     }
   }
 }
