@@ -20,11 +20,13 @@ export class RecordController {
     const categoryID = createRecordDto.categoryID;
     const date = createRecordDto.date;
     const amount = createRecordDto.amount;
+    const currency = createRecordDto.currency;
     const res = await this.recordService.createRecord(
       userID,
       categoryID,
       date,
       amount,
+      currency,
     );
     return res;
   }

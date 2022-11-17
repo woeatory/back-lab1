@@ -26,12 +26,12 @@ model Category {
 }
 
 model Record {
-  id         Int      @id @default(autoincrement())
-  user       User?     @relation(fields: [userID], references: [id])
-  userID     Int
-  category   Category? @relation(fields: [categoryID], references: [id])
-  categoryID Int
-  date       DateTime? @default(now())
-  amount     Int
-  // todo implement currency
+  id           Int       @id @default(autoincrement())
+  user         User?     @relation(fields: [userID], references: [id])
+  userID       Int
+  category     Category? @relation(fields: [categoryID], references: [id])
+  categoryID   Int
+  date         DateTime? @default(now())
+  amount       Int
+  currency     String?    @default("USD")
 }

@@ -20,8 +20,8 @@ async function bootstrap() {
   await app.listen(env.PORT || 8100, () => {
     console.log(
       `
-    🚀 Server ready at: http://localhost:8100
-    ⭐️ See sample queries: http://localhost:8100/api#/`.trimEnd(),
+ 🚀 Server ready at: http://localhost:8100
+⭐️ See sample queries: http://localhost:8100/api#/`.trimEnd(),
     );
   });
 }

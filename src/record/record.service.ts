@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { Currency } from './entities/currency.entity';
 
 const NOT_FOUND_ERROR: Error = new Error('Record not found');
 @Injectable()
@@ -9,15 +10,21 @@ export class RecordService {
     userID: number,
     categoryID: number,
     date: Date,
-    amount: string,
+    amount: number,
+    currency?: string,
   ) {
     try {
+      let curr: Currency;
+      if (currency !== null) {
+        curr = new Currency(currency);
+      }
       const record = await this.prisma.record.create({
         data: {
           userID: userID,
           categoryID: categoryID,
           date: date,
-          amount: 100,
+          amount: amount,
+          currency: curr.name,
         },
       });
       return record;

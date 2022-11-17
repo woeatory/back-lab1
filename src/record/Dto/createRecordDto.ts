@@ -5,8 +5,11 @@ export class CreaeteRecordDto {
   userID: number;
   @IsNumber()
   categoryID: number;
+  @IsNumber()
+  amount: number;
+  @IsOptional()
   @IsString()
-  amount: string;
+  currency: string;
   @IsOptional()
   @IsDateString()
   date?: Date;
