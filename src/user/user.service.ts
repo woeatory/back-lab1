@@ -1,21 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { User } from './user.entity';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class UserService {
-  private usersList: User[] = [
-    new User(0, 'Yurii'),
-    new User(1, 'woeatory'),
-    new User(2, 'wolterh'),
-  ];
-
-  createUser(userName: string) {
-    const userID = this.usersList.length;
-    const newUser = new User(userID, userName);
-    this.usersList.push(newUser);
-    return newUser;
+  constructor(private prisma: PrismaService) {}
+  async createUser(userName: string) {
+    try {
+      const user = await this.prisma.user.create({
+        data: {
+          userName: userName,
+        },
+      });
+      return user;
+    } catch (error) {
+      const err = new Error('This user already exists');
+      console.error(err);
+      return err.message;
+    }
   }
-  get getUsersList() {
-    return this.usersList;
+  async getUsersList() {
+    const users = await this.prisma.user.findMany();
+    return users;
   }
 }

@@ -1,21 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { Category } from './category.entity';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class CategoryService {
-  private categoriesList: Category[] = [
-    new Category(0, 'products'),
-    new Category(1, 'transport'),
-    new Category(2, 'games'),
-  ];
-
-  createCategory(name: string) {
-    const categoryID = this.categoriesList.length;
-    const newCategory = new Category(categoryID, name);
-    this.categoriesList.push(newCategory);
-    return newCategory;
+  constructor(private prisma: PrismaService) {}
+  async createCategory(name: string) {
+    try {
+      const category = await this.prisma.category.create({
+        data: {
+          name: name,
+        },
+      });
+      return category;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   }
-  get getCategoriesList() {
-    return this.categoriesList;
+  async getCategoriesList() {
+    const users = await this.prisma.category.findMany();
+    return users;
   }
 }
