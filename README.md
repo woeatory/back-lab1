@@ -27,4 +27,5 @@ $ npm run start:dev
 ```
 
 Application will be accesed on <http://localhost:3000/>
+
 To see swagger documentation go to <http://localhost:3000/api#>
