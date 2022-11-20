@@ -1,4 +1,4 @@
-# Back-end Lab 1
+# Back-end Lab
 
 ## Description
 
