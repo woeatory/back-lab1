@@ -50,6 +50,6 @@ docker-compose up
 
 ## Deploy
 
-Powered by Render.com
+Powered by <https://render.com>
 
 <https://expenses-lab.onrender.com/api#/>
