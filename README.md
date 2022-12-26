@@ -5,10 +5,12 @@
 Виконав:
 ІП-03 Бобаль Юрій
 
+Варіант: 4 mod 3 = 1
+
 ## Installation
 
 ```bash
-git clone https://github.com/woeatory/back-lab1.git
+git clone https://github.com/woeatory/back-lab.git
 ```
 
 ```bash
@@ -29,3 +31,19 @@ $ npm run start:dev
 Application will be accesed on <http://localhost:3000/>
 
 To see swagger documentation go to <http://localhost:3000/api#>
+
+## Docker
+
+```bash
+docker-compose build
+```
+
+```bash
+docker-compose up
+```
+
+## Deploy
+
+Powered by Render.com
+
+<https://expenses-lab.onrender.com/api#/>
