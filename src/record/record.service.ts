@@ -13,12 +13,12 @@ export class RecordService {
     amount: number,
     currency?: string,
   ) {
-    try {
-      let curr: Currency;
-      if (currency !== null) {
-        curr = new Currency(currency);
-      }
-      const record = await this.prisma.record.create({
+    let curr: Currency;
+    if (currency !== null) {
+      curr = new Currency(currency);
+    }
+    const record = await this.prisma.record
+      .create({
         data: {
           userID: userID,
           categoryID: categoryID,
@@ -26,40 +26,40 @@ export class RecordService {
           amount: amount,
           currency: curr.name,
         },
+      })
+      .catch((err) => {
+        console.error(err.message);
+        throw err;
       });
-      return record;
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+    return record;
   }
   async getRecordByUserID(userID: number) {
-    try {
-      const record = await this.prisma.record.findMany({
+    const record = await this.prisma.record
+      .findMany({
         where: {
           userID: userID,
         },
+      })
+      .catch((err) => {
+        console.error(err.message);
+        throw err;
       });
-      if (record.length === 0) throw NOT_FOUND_ERROR;
-      return record;
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+    if (record.length === 0) throw NOT_FOUND_ERROR;
+    return record;
   }
   async getRecordByUserIDandCategory(userID: number, categoryID: number) {
-    try {
-      const record = await this.prisma.record.findMany({
+    const record = await this.prisma.record
+      .findMany({
         where: {
           userID: userID,
           categoryID: categoryID,
         },
+      })
+      .catch((err) => {
+        console.error(err.message);
+        throw err;
       });
-      if (record.length === 0) throw NOT_FOUND_ERROR;
-      return record;
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+    if (record.length === 0) throw NOT_FOUND_ERROR;
+    return record;
   }
 }

@@ -20,15 +20,12 @@ export class CategoryController {
       );
       return res;
     } catch (error) {
-      throw new HttpException(
-        'This category already exists',
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new HttpException(`error`, HttpStatus.BAD_REQUEST);
     }
   }
+
   @Get('list')
   async getCategoriesList() {
-    const res = await this.categoryService.getCategoriesList();
-    return res;
+    return await this.categoryService.getCategoriesList();
   }
 }

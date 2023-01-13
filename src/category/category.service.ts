@@ -5,20 +5,20 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class CategoryService {
   constructor(private prisma: PrismaService) {}
   async createCategory(name: string) {
-    try {
-      const category = await this.prisma.category.create({
+    const category = await this.prisma.category
+      .create({
         data: {
           name: name,
         },
+      })
+      .catch((err) => {
+        console.error(err.message);
+        throw err;
       });
-      return category;
-    } catch (error) {
-      console.log(error);
-      return error;
-    }
+    console.log('created category', { category });
+    return category;
   }
   async getCategoriesList() {
-    const users = await this.prisma.category.findMany();
-    return users;
+    return await this.prisma.category.findMany();
   }
 }

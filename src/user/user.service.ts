@@ -11,11 +11,11 @@ export class UserService {
           userName: userName,
         },
       });
+      console.log('created new user', user);
       return user;
     } catch (error) {
-      const err = new Error('This user already exists');
-      console.error(err);
-      return err.message;
+      console.log(error);
+      throw error;
     }
   }
   async getUsersList() {
