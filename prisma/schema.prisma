@@ -12,9 +12,12 @@ datasource db {
 
 model User {
   id         Int        @id @default(autoincrement())
-  userName   String     @unique
+  username   String     @unique
+  hash       String
   records    Record[]
   categories Category[]
+
+  @@map("users")
 }
 
 model Category {
@@ -23,15 +26,19 @@ model Category {
   Record Record[]
   User   User?    @relation(fields: [userID], references: [id])
   userID Int?
+
+  @@map("categories")
 }
 
 model Record {
-  id           Int       @id @default(autoincrement())
-  user         User?     @relation(fields: [userID], references: [id])
-  userID       Int
-  category     Category? @relation(fields: [categoryID], references: [id])
-  categoryID   Int
-  date         DateTime? @default(now())
-  amount       Int
-  currency     String?    @default("USD")
+  id         Int       @id @default(autoincrement())
+  user       User?     @relation(fields: [userID], references: [id])
+  userID     Int
+  category   Category? @relation(fields: [categoryID], references: [id])
+  categoryID Int
+  date       DateTime? @default(now())
+  amount     Int
+  currency   String?   @default("USD")
+
+  @@map("records")
 }

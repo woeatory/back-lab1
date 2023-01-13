@@ -7,6 +7,7 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Query,
 } from '@nestjs/common';
 import { CreaeteRecordDto } from './Dto/createRecordDto';
 import { RecordService } from './record.service';
@@ -31,7 +32,7 @@ export class RecordController {
     return res;
   }
 
-  @Get('search/:id')
+  @Get(':id')
   async searchByID(@Param('id', ParseIntPipe) id: number) {
     try {
       const res = await this.recordService.getRecordByUserID(id);
@@ -40,15 +41,12 @@ export class RecordController {
       throw new HttpException('Record not found', HttpStatus.BAD_REQUEST);
     }
   }
-  @Get('seachByIDandCategory/:id/:category')
-  async seatchByUsedIDandCategory(
-    @Param('id', ParseIntPipe) id: number,
-    @Param('category', ParseIntPipe) category: number,
-  ) {
+  @Get(':userId/:categoryId')
+  async seatchByUsedIDandCategory(@Param() params) {
     try {
       const res = await this.recordService.getRecordByUserIDandCategory(
-        id,
-        category,
+        parseInt(params.userId),
+        parseInt(params.categoryId),
       );
       return res;
     } catch (error) {
