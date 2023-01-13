@@ -1,16 +1,9 @@
-# Back-end Lab
-
-## Description
-
-Виконав:
-ІП-03 Бобаль Юрій
-
-Варіант: 4 mod 3 = 1
+# Expenses
 
 ## Installation
 
 ```bash
-git clone https://github.com/woeatory/back-lab.git
+git clone https://github.com/woeatory/expenses.git
 ```
 
 ```bash
