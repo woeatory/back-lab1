@@ -4,11 +4,12 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class CategoryService {
   constructor(private prisma: PrismaService) {}
-  async createCategory(name: string) {
+  async createCategory(name: string, userId: number) {
     const category = await this.prisma.category
       .create({
         data: {
           name: name,
+          userID: userId,
         },
       })
       .catch((err) => {
